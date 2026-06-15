@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #f8f9fa;
+    color: #191c1d;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+  }
+}
+
+/* VS 캘리그라피 로고 */
+.vs-logo {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 2.75rem;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #1a237e;
+  /* 잉크 번짐 느낌의 텍스트 렌더링 */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 밑줄 장식선 (캘리그라피 붓 획 느낌) */
+.vs-logo::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(to right, #1a237e 60%, transparent 100%);
+  margin-top: 2px;
+  opacity: 0.35;
+}
+
+@layer components {
+  /* 타임라인 수직선 애니메이션 */
+  .timeline-line {
+    @apply absolute left-4 top-0 bottom-0 w-px bg-outline-variant;
+  }
+
+  /* 장면 카드 진입 애니메이션 */
+  .scene-card-enter {
+    animation: fadeSlideUp 0.4s ease-out both;
+  }
+
+  /* 플래시카드 뒤집기 효과 */
+  .card-flip {
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+@layer utilities {
+  /* 커스텀 스크롤바 (웹킷) */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #f3f4f5;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #c6c5d4;
+    border-radius: 9999px;
+  }
+}
+
+/* 장면 카드 등장 애니메이션 */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 모달 등장 애니메이션 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-overlay {
+  animation: fadeIn 0.2s ease-out both;
+}
+
+.modal-content {
+  animation: slideUp 0.25s ease-out both;
+}
+
+/* 복습 카드 전환 애니메이션 */
+@keyframes cardNext {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.review-card-enter {
+  animation: cardNext 0.3s ease-out both;
+}
